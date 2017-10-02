@@ -1,20 +1,13 @@
 from conans import ConanFile, CMake
 import os
 
-username = os.getenv('CONAN_USERNAME', 'jjones646')
-os.environ['CONAN_USERNAME'] = username
-channel = os.getenv('CONAN_CHANNEL', 'testing')
-os.environ['CONAN_CHANNEL'] = channel
-os.environ['CONAN_LOG_RUN_TO_FILE'] = os.getenv('CONAN_LOG_RUN_TO_FILE', '1')
-
-class NlohmannJsonConanPackageTest(ConanFile):
+class OptionalConanPackageTest(ConanFile):
     settings =  {
                     'os': None,
                     'compiler': None,
                     'arch': None,
                     'build_type': ['Release', 'Debug']
                 }
-    requires = 'json/2.1.0@{!s}/{!s}'.format(username, channel)
     generators = 'cmake'
     build_policy = 'missing'
 
@@ -28,4 +21,4 @@ class NlohmannJsonConanPackageTest(ConanFile):
         self.copy(pattern='*.dylib', dst='bin', src='lib')
 
     def test(self):
-        self.run(os.sep.join(['.', 'bin', 'JsonPackageTest']))
+        self.run(os.sep.join(['.', 'bin', 'OptionalPackageTest']))

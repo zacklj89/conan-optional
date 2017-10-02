@@ -1,28 +1,25 @@
-#include "nlohmann/json.hpp"
+#include "nonstd/optional.hpp"
+
+#include <cstdlib>
 #include <iostream>
 
-using json = nlohmann::json;
+using nonstd::optional;
+using nonstd::nullopt;
 
-int main()
+optional<int> to_int( char const * const text )
 {
-  std::cout << "\n===== BEGIN TestPackage =====\n";
+    char * pos = NULL;
+    const int value = strtol( text, &pos, 0 );
 
-  const json jsonObject = {{"pi", 3.141},
-                     {"happy", true},
-                     {"name", "Niels"},
-                     {"nothing", nullptr},
-                     {"answer", {{"everything", 42}}},
-                     {"list", {1, 0, 2}},
-                     {"object", {{"currency", "USD"}, {"value", 42.99}}}};
+    return pos == text ? nullopt : optional<int>( value );
+}
 
-  std::cout << std::setw(4) << jsonObject << '\n';
+int main( int argc, char * argv[] )
+{
+    char * text = argc > 1 ? argv[1] : "42";
 
-#ifndef NDEBUG
-    std::cout << "Build Type: DEBUG\n";
-#else
-    std::cout << "Build Type: RELEASE\n";
-#endif
+    optional<int> oi = to_int( text );
 
-    std::cout << "====== END TestPackage ======\n";
-    return 0;
+    if ( oi ) std::cout << "'" << text << "' is " << *oi;
+    else      std::cout << "'" << text << "' isn't a number";
 }

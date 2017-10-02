@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION  3.0 )
 
-project( JsonPackageTest
+project( OptionalPackageTest
          VERSION       0.0.1
          LANGUAGES     C  CXX
 )
@@ -17,9 +17,9 @@ conan_basic_setup( TARGETS )
 # supress cmake warnings about unused variables that conan passes in
 set( _ignore_me  ${CONAN_EXPORTED} )
 
-add_executable( JsonPackageTest
+add_executable( OptionalPackageTest
     main.cpp
 )
-target_link_libraries( JsonPackageTest
-    PRIVATE  CONAN_PKG::json
+target_link_libraries( OptionalPackageTest
+    PRIVATE  CONAN_PKG::optional
 )
