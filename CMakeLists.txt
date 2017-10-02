@@ -1,0 +1,5 @@
+project (ConanOptional)
+cmake_minimum_required( VERSION 3.0 )
+include( conanbuildinfo.cmake )
+conan_basic_setup( TARGETS )
+add_subdirectory( optional )
