@@ -1,3 +1,3 @@
-# conan-nlohmann-json
+# conan-optional 
 
-Conan package for the [JSON](https://github.com/nlohmann/json) for modern C++ library.
+Conan package for the [nonstd::optional]https://github.com/martinmoene/optional-lite) for modern C++ library.
