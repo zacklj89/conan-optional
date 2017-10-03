@@ -36,6 +36,7 @@ class OptionalConan(ConanFile):
     def build(self):
         cmake = self._run_cmake()    # rerun cmake
         cmake.build()
+        cmake.test()
 
     def package(self):
         self.copy(pattern='*optional.hpp', dst='include/nonstd', keep_path=False)
