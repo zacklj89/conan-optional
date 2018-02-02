@@ -19,11 +19,6 @@ class OptionalConan(ConanFile):
     def _get_build_dir(self):
         return os.getcwd()
 
-    def _run_cmake(self):
-        cmake = CMake(self, parallel=True)
-        cmake.configure(build_dir=self._get_build_dir(), source_dir=self.conanfile_directory)
-        return cmake
-
 ## replace url and rename
     def source(self):
         download_url = 'https://github.com/martinmoene/optional-lite/archive/v{!s}.zip'.format(self.version)
@@ -34,7 +29,8 @@ class OptionalConan(ConanFile):
         os.rename('optional-lite-{!s}'.format(self.version), 'optional')
 
     def build(self):
-        cmake = self._run_cmake()    # rerun cmake
+        cmake = CMake(self)
+        cmake.configure()
         cmake.build()
         cmake.test()
 
